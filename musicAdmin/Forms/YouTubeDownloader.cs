@@ -22,8 +22,13 @@ namespace musicAdmin.Forms
         {
             // FIXME ver donde guardar archivo descargar, manejar con property
             // FIXME ver porque no anda video downloader
-            string video = YoutubeController.GetAudioFromVideo(txtLink.Text, @"C:\Users\FacundoMoral\Downloads");
+            string video = YoutubeController.GetAudioFromVideo(txtLink.Text, @"C:\Users\FacundoMoral\Downloads", this);
             MessageBox.Show(video);
         }
+        public void SetPBA(int newValue)
+        {
+            pbaDescarga.Value = newValue;
+        }
+
     }
 }

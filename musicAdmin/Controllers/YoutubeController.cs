@@ -1,8 +1,10 @@
-﻿using System;
+﻿using musicAdmin.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using YoutubeExtractor;
 
 namespace musicAdmin.Controllers
@@ -14,7 +16,7 @@ namespace musicAdmin.Controllers
          * @path: donde se va a guardar el video
          * @return: el full path del nuevo archivo, null si fallo
          */
-        public static string GetVideo(string link, string path)
+        public static string GetVideo(string link, string path, YouTubeDownloader form)
         {
             try
             {
@@ -27,10 +29,12 @@ namespace musicAdmin.Controllers
                 {
                     DownloadUrlResolver.DecryptDownloadUrl(video);
                 }
-                string fullPath = System.IO.Path.Combine(path, video.Title) + ".mp4";
+                // quito caracteres no permitidos para nombres de videos
+                string fullPath = System.IO.Path.Combine(path, ComunController.QuitarCaracteresProhibidos(video.Title)) + ".mp4";
                 var videoDownloader = new VideoDownloader(video, fullPath);
+                var form2 = new YouTubeDownloader();
                 // FIXME manejo de progress bar
-                //videoDownloader.DownloadProgressChanged += (sender, args) => Console.WriteLine(args.ProgressPercentage);
+                videoDownloader.DownloadProgressChanged += (sender, args) => form2.SetPBA(Convert.ToInt32(args.ProgressPercentage));
                 videoDownloader.Execute();
                 return fullPath;
             }
@@ -47,9 +51,9 @@ namespace musicAdmin.Controllers
          * @path: donde se va a guardar el audio
          * @return: path del video
          */
-        public static string GetAudioFromVideo(string link, string path)
+        public static string GetAudioFromVideo(string link, string path, YouTubeDownloader form)
         {
-            return ConvertController.MP4ToMP3(GetVideo(link, path));
+            return ConvertController.MP4ToMP3(GetVideo(link, path, form));
         }
     }
 }
