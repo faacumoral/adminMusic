@@ -39,6 +39,7 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnCopiar = new System.Windows.Forms.Button();
             this.btnDescargar = new System.Windows.Forms.Button();
+            this.btnRecargar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMusica)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.musicaBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -131,11 +132,23 @@
             this.btnDescargar.UseVisualStyleBackColor = true;
             this.btnDescargar.Click += new System.EventHandler(this.btnDescargar_Click);
             // 
+            // btnRecargar
+            // 
+            this.btnRecargar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRecargar.Location = new System.Drawing.Point(596, 23);
+            this.btnRecargar.Name = "btnRecargar";
+            this.btnRecargar.Size = new System.Drawing.Size(134, 23);
+            this.btnRecargar.TabIndex = 3;
+            this.btnRecargar.Text = "Recargar";
+            this.btnRecargar.UseVisualStyleBackColor = true;
+            this.btnRecargar.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(779, 452);
+            this.Controls.Add(this.btnRecargar);
             this.Controls.Add(this.btnDescargar);
             this.Controls.Add(this.btnCopiar);
             this.Controls.Add(this.dgvMusica);
@@ -144,7 +157,6 @@
             this.Name = "Inicio";
             this.Text = "Inicio";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.Inicio_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMusica)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.musicaBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -162,6 +174,7 @@
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnCopiar;
         private System.Windows.Forms.Button btnDescargar;
+        private System.Windows.Forms.Button btnRecargar;
     }
 }
 

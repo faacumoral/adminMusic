@@ -1,4 +1,5 @@
-﻿using musicAdmin.Model;
+﻿using musicAdmin.Forms;
+using musicAdmin.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -52,10 +53,11 @@ namespace musicAdmin.Controllers
          */
         public List<USB> GetUSBConectados()
         {
+            // FIXME encapsular try
             List<USB> result = new List<USB>();
             foreach (DriveInfo drive in DriveInfo.GetDrives())
             {
-                if (drive.DriveType == DriveType.Removable)
+                if (drive.DriveType == DriveType.Removable && drive.IsReady)
                 {
                     result.Add(new USB
                     {
@@ -87,6 +89,15 @@ namespace musicAdmin.Controllers
             }
         }
 
+        /* sobrecarga de copiar, si no viene destino manda al defaultUsb
+         * @archivo: arhivo a copiar
+         * @return: true si copio bien, false si fallo
+         */
+        public bool Copiar(Archivo archivo)
+        {
+            return Copiar(archivo, DataController.defaultUsb.Ruta);
+        }
+
         /*
          * crear un objeto archivo en base al path
          * @path: path donde buscar el archivo
@@ -112,6 +123,31 @@ namespace musicAdmin.Controllers
             }
             
         }
-    
+        /* asigna un dafultUsb
+         * @return: string con mensaje de error si algo fallo, null si todo ok
+         */
+        public string GetUSB()
+        {
+            if (DataController.defaultUsb == null)
+            {
+                var usbs = this.GetUSBConectados();
+                if (usbs.Count == 0)
+                {
+                    return "No se han encontrado USB conectados.";
+                }
+                else if (usbs.Count == 1)
+                {
+                    // asigno ese usb como default
+                    DataController.defaultUsb = usbs[0];
+                }
+                else
+                {
+                    return "Hay más de un dispositivo USB conectado. Por favor desconecte y deje uno solo.";
+                }
+            }
+            // ya hay usb por default
+            return null;
+            
+        }
     }
 }

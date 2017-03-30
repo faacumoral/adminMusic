@@ -19,42 +19,42 @@ namespace musicAdmin
         ArchivoController ac = new ArchivoController();
         MediaPlayerController mpc = new MediaPlayerController();
         List<Musica> musica = new List<Musica>();
+        Inicio form = null;
 
         public Inicio()
         {
+            form = this;
             InitializeComponent();
         }
 
         private void Inicio_Load(object sender, EventArgs e)
         {
-            musica = mc.GetTodasEnMyMusic();
-            dgvMusica.DataSource = musica;
+            recargarCanciones();
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            dgvMusica.Focus();
+            form.dgvMusica.Focus();
             mpc.Play(musica[dgvMusica.CurrentCell.RowIndex].FullPath);
         }
         private void btnStop_Click(object sender, EventArgs e)
         {
-            dgvMusica.Focus();
+            form.dgvMusica.Focus();
             mpc.Stop();
         }
 
         private void btnCopiar_Click(object sender, EventArgs e)
         {
-            List<USB> usbs = ac.GetUSBConectados();
-            // chequeo si hay usbs conectados
-            if (usbs.Count == 0)
+            if (form.dgvMusica.CurrentCell == null)
             {
-                MessageBox.Show("No se han encontrado USB conectados. Pruebe re-conectarlos si ya lo hizo.");
-            } 
-            // hay un solo usb o tengo un por default, copio a ese 
-            else if (/*usbs.Count == 1 || */DataController.defaultUsb != null )
+                MessageBox.Show("¡Seleccione una cancion!");
+                return;
+            }
+            string msg = ac.GetUSB();
+            if ( msg == null)
             {
-                // FIXME cambiar logica usbs
-                if (ac.Copiar(musica[dgvMusica.CurrentCell.RowIndex], usbs[0].Ruta))
+                // se leyo bien un usb, copio archivo
+                if (ac.Copiar(musica[form.dgvMusica.CurrentCell.RowIndex]))
                 {
                     MessageBox.Show("¡Copia exitosa!");
                 }
@@ -63,15 +63,12 @@ namespace musicAdmin
                     MessageBox.Show("¡Copia falló!");
                 }
             }
-            // hay mas de uno, tengo que consultar a cual quiero copiar
             else
             {
-                MessageBox.Show("Se ha encontrado más de un pendrive conectado, por favor seleccione a cual desea copiar");
-                SeleccionUSB formUSB = new SeleccionUSB();
-                formUSB.Show();
-                this.Hide();
+                // algo fallo (ninguno o mas de uno conectado)
+                MessageBox.Show(msg);
             }
-            dgvMusica.Focus();
+            form.dgvMusica.Focus();
 
         }
 
@@ -83,9 +80,23 @@ namespace musicAdmin
 
         private void btnDescargar_Click(object sender, EventArgs e)
         {
-            YouTubeDownloader form = new YouTubeDownloader();
-            form.Show();
-            this.Hide();
+            YouTubeDownloader formYT = new YouTubeDownloader();
+            formYT.Show();
+            form.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            recargarCanciones();
+        }
+        internal void recargarCanciones()
+        {
+            musica = mc.GetTodasEnMyMusic();
+            form.dgvMusica.DataSource = musica;
+            if (musica.Count == 0)
+            {
+                MessageBox.Show("No se han encontrado canciones. Pulse el boton 'Recargar' para recargar canciones.");
+            }
         }
     }
 }

@@ -67,12 +67,6 @@
     <Compile Include="Controllers\MediaPlayerController.cs" />
     <Compile Include="Controllers\MusicaController.cs" />
     <Compile Include="Controllers\YoutubeController.cs" />
-    <Compile Include="Forms\SeleccionUSB.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SeleccionUSB.Designer.cs">
-      <DependentUpon>SeleccionUSB.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\YouTubeDownloader.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,9 +87,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SeleccionUSB.resx">
-      <DependentUpon>SeleccionUSB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\YouTubeDownloader.resx">
       <DependentUpon>YouTubeDownloader.cs</DependentUpon>

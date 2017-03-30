@@ -15,7 +15,7 @@ namespace musicAdmin.Controllers
         {
             dc = this;
         }
-        public static object defaultUsb = null;
+        public static USB defaultUsb = null;
 
         public static string defaultPath = null;
     }
