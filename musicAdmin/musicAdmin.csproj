@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ComunController.cs" />
     <Compile Include="Controllers\ConvertController.cs" />
+    <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\ExceptionController.cs" />
     <Compile Include="Controllers\MediaPlayerController.cs" />
     <Compile Include="Controllers\MusicaController.cs" />

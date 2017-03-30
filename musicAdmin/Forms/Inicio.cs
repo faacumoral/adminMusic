@@ -19,7 +19,6 @@ namespace musicAdmin
         ArchivoController ac = new ArchivoController();
         MediaPlayerController mpc = new MediaPlayerController();
         List<Musica> musica = new List<Musica>();
-        int defaultUsb = -1;
 
         public Inicio()
         {
@@ -52,8 +51,9 @@ namespace musicAdmin
                 MessageBox.Show("No se han encontrado USB conectados. Pruebe re-conectarlos si ya lo hizo.");
             } 
             // hay un solo usb o tengo un por default, copio a ese 
-            else if (usbs.Count == 1 || defaultUsb != -1)
+            else if (/*usbs.Count == 1 || */DataController.defaultUsb != null )
             {
+                // FIXME cambiar logica usbs
                 if (ac.Copiar(musica[dgvMusica.CurrentCell.RowIndex], usbs[0].Ruta))
                 {
                     MessageBox.Show("¡Copia exitosa!");
@@ -68,16 +68,11 @@ namespace musicAdmin
             {
                 MessageBox.Show("Se ha encontrado más de un pendrive conectado, por favor seleccione a cual desea copiar");
                 SeleccionUSB formUSB = new SeleccionUSB();
-                formUSB.CargarUSBs(usbs);
                 formUSB.Show();
                 this.Hide();
             }
             dgvMusica.Focus();
 
-        }
-        public void SeleccionUSBBack(int index)
-        {
-            defaultUsb = index;
         }
 
         private void dgvMusica_CellContentClick(object sender, DataGridViewCellEventArgs e)

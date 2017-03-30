@@ -20,6 +20,7 @@ namespace musicAdmin.Controllers
         {
             try
             {
+                //YouTubeDownloader.ChangePBAValueInt(100);
                 IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link);
                 // get video
                 VideoInfo video = videoInfos
@@ -32,9 +33,7 @@ namespace musicAdmin.Controllers
                 // quito caracteres no permitidos para nombres de videos
                 string fullPath = System.IO.Path.Combine(path, ComunController.QuitarCaracteresProhibidos(video.Title)) + ".mp4";
                 var videoDownloader = new VideoDownloader(video, fullPath);
-                var form2 = new YouTubeDownloader();
-                // FIXME manejo de progress bar
-                videoDownloader.DownloadProgressChanged += (sender, args) => form2.SetPBA(Convert.ToInt32(args.ProgressPercentage));
+                videoDownloader.DownloadProgressChanged += (sender, args) => YouTubeDownloader.SetPBAValue(Convert.ToInt32(args.ProgressPercentage));
                 videoDownloader.Execute();
                 return fullPath;
             }

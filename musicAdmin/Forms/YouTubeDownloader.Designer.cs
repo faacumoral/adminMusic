@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtLink = new System.Windows.Forms.TextBox();
             this.pbaDescarga = new System.Windows.Forms.ProgressBar();
+            this.lblState = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnDescargar
@@ -65,16 +66,25 @@
             // pbaDescarga
             // 
             this.pbaDescarga.ForeColor = System.Drawing.Color.LawnGreen;
-            this.pbaDescarga.Location = new System.Drawing.Point(164, 142);
+            this.pbaDescarga.Location = new System.Drawing.Point(164, 156);
             this.pbaDescarga.Name = "pbaDescarga";
             this.pbaDescarga.Size = new System.Drawing.Size(252, 23);
             this.pbaDescarga.TabIndex = 3;
+            // 
+            // lblState
+            // 
+            this.lblState.AutoSize = true;
+            this.lblState.Location = new System.Drawing.Point(275, 130);
+            this.lblState.Name = "lblState";
+            this.lblState.Size = new System.Drawing.Size(0, 13);
+            this.lblState.TabIndex = 4;
             // 
             // YouTubeDownloader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(615, 262);
+            this.Controls.Add(this.lblState);
             this.Controls.Add(this.pbaDescarga);
             this.Controls.Add(this.txtLink);
             this.Controls.Add(this.label1);
@@ -92,5 +102,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtLink;
         private System.Windows.Forms.ProgressBar pbaDescarga;
+        private System.Windows.Forms.Label lblState;
     }
 }

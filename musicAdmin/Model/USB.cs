@@ -10,5 +10,6 @@ namespace musicAdmin.Model
     {
         public string Ruta { get; set; }
         public string Etiqueta { get; set; }
+        public string friendlyName { get { return this.Etiqueta + " (" + this.Ruta + ")"; } }
     }
 }

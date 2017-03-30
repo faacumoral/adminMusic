@@ -51,6 +51,7 @@
             this.cboUSB.Name = "cboUSB";
             this.cboUSB.Size = new System.Drawing.Size(156, 21);
             this.cboUSB.TabIndex = 2;
+            this.cboUSB.Text = "friendlyName";
             // 
             // SeleccionUSB
             // 
