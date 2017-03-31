@@ -43,16 +43,32 @@ namespace musicAdmin.Forms
 
         private void btnDescargar_Click(object sender, EventArgs e)
         {
+            
             // FIXME ver donde guardar archivo descargar, manejar con property
-            string video = YoutubeController.GetAudioFromVideo(txtLink.Text, @"C:\Users\FacundoMoral\Downloads", this);
+            string video = YoutubeController.GetAudioFromVideo(txtLink.Text, @"C:\Users\FacundoMoral\Downloads");
             if (video == null)
             {
                 MessageBox.Show("¡La descarga ha fallado!");
             }
             else
             {
-                // FIXME ver para ya pasar cancion al pendrive
-                MessageBox.Show("¡La descarga ha finalzado! ¿Desea pasar el audio al pendrive contectado?");
+                if (MessageBox.Show("¡La descarga ha finalzado! ¿Desea pasar el audio al pendrive contectado?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    ArchivoController ac = new ArchivoController();
+                    if (ac.Copiar(ArchivoController.GetFromPath(video)))
+                    {
+                        MessageBox.Show("¡Copia exitosa!");
+                    }
+                    else 
+                    {
+                        MessageBox.Show("¡Copia falló!");
+                    }
+                    // FIXME primero getUsb y despues ver si se puede copiar o no
+                    Inicio inicio = new Inicio();
+                    inicio.Show();
+                    form.Close();
+                }
+                
             }
             
         }

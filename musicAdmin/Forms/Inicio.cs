@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -25,11 +26,6 @@ namespace musicAdmin
         {
             form = this;
             InitializeComponent();
-        }
-
-        private void Inicio_Load(object sender, EventArgs e)
-        {
-            recargarCanciones();
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
@@ -91,12 +87,22 @@ namespace musicAdmin
         }
         internal void recargarCanciones()
         {
+            form.Enabled = false;
+            var th = ComunController.Loading("Cargando canciones...");
+            form.dgvMusica.DataSource = null;
             musica = mc.GetTodasEnMyMusic();
             form.dgvMusica.DataSource = musica;
             if (musica.Count == 0)
             {
                 MessageBox.Show("No se han encontrado canciones. Pulse el boton 'Recargar' para recargar canciones.");
             }
+            form.Enabled = true;
+            ComunController.LoadingFinish(th);            
+        }
+
+        private void Inicio_Load_1(object sender, EventArgs e)
+        {
+            recargarCanciones();
         }
     }
 }

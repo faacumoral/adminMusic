@@ -1,8 +1,11 @@
-﻿using System;
+﻿using musicAdmin.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace musicAdmin.Controllers
 {
@@ -19,6 +22,26 @@ namespace musicAdmin.Controllers
                 path = path.Replace(ch, ' ');		 
 	        }
             return path;
+        }
+
+        /* muestra el form de carga 
+         * @form: form actual (para deshabilitar)
+         * @msg: mensaje a mostrar
+         * @return: thread del form de carga
+         */
+        public static Thread Loading(string msg)
+        {
+            var th = new Thread(() => new Loading(msg).ShowDialog());
+            th.Start();
+            return th;
+        }
+        /* oculta el form
+         * @form: form a deshabilitar
+         * @th: thread a abortar
+         */ 
+        public static void LoadingFinish(Thread th)
+        {
+            th.Abort();
         }
     }
 }

@@ -13,7 +13,6 @@ C:\Users\FacundoMoral\Desktop\musicAdmin\musicAdmin\bin\Debug\policy.2.0.taglib-
 C:\Users\FacundoMoral\Desktop\musicAdmin\musicAdmin\obj\Debug\Interop.MediaPlayer.dll
 C:\Users\FacundoMoral\Desktop\musicAdmin\musicAdmin\obj\Debug\Interop.WMPLib.dll
 C:\Users\FacundoMoral\Desktop\musicAdmin\musicAdmin\obj\Debug\musicAdmin.csproj.ResolveComReference.cache
-C:\Users\FacundoMoral\Desktop\musicAdmin\musicAdmin\obj\Debug\musicAdmin.Forms.SeleccionUSB.resources
 C:\Users\FacundoMoral\Desktop\musicAdmin\musicAdmin\obj\Debug\musicAdmin.Forms.YouTubeDownloader.resources
 C:\Users\FacundoMoral\Desktop\musicAdmin\musicAdmin\bin\Debug\Newtonsoft.Json.dll
 C:\Users\FacundoMoral\Desktop\musicAdmin\musicAdmin\bin\Debug\YoutubeExtractor.dll
@@ -41,3 +40,4 @@ C:\Users\CUVAGES\Desktop\adminMusic-master\musicAdmin\obj\Debug\musicAdmin.Inici
 C:\Users\CUVAGES\Desktop\adminMusic-master\musicAdmin\obj\Debug\musicAdmin.Forms.YouTubeDownloader.resources
 C:\Users\CUVAGES\Desktop\adminMusic-master\musicAdmin\obj\Debug\musicAdmin.Properties.Resources.resources
 C:\Users\CUVAGES\Desktop\adminMusic-master\musicAdmin\obj\Debug\musicAdmin.csproj.GenerateResource.Cache
+C:\Users\FacundoMoral\Desktop\musicAdmin\musicAdmin\obj\Debug\musicAdmin.Forms.Loading.resources

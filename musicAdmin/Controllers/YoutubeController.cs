@@ -16,13 +16,13 @@ namespace musicAdmin.Controllers
          * @path: donde se va a guardar el video
          * @return: el full path del nuevo archivo, null si fallo
          */
-        public static string GetVideo(string link, string path, YouTubeDownloader form)
+        public static string GetVideo(string link, string path)
         {
+            // FIXME manejar mensajes asi
+            //prueba formPrueba = new prueba("asd");
             try
             {
-                //YouTubeDownloader.ChangePBAValueInt(100);
                 IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link);
-                // get video
                 VideoInfo video = videoInfos
                     .First(info => info.VideoType == VideoType.Mp4 && info.Resolution == 360);
 
@@ -50,9 +50,9 @@ namespace musicAdmin.Controllers
          * @path: donde se va a guardar el audio
          * @return: path del video
          */
-        public static string GetAudioFromVideo(string link, string path, YouTubeDownloader form)
+        public static string GetAudioFromVideo(string link, string path)
         {
-            return ConvertController.MP4ToMP3(GetVideo(link, path, form));
+            return ConvertController.MP4ToMP3(GetVideo(link, path));
         }
     }
 }

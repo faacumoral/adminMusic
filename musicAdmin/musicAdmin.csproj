@@ -67,6 +67,18 @@
     <Compile Include="Controllers\MediaPlayerController.cs" />
     <Compile Include="Controllers\MusicaController.cs" />
     <Compile Include="Controllers\YoutubeController.cs" />
+    <Compile Include="Forms\Loading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Loading.Designer.cs">
+      <DependentUpon>Loading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\prueba.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\prueba.Designer.cs">
+      <DependentUpon>prueba.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\YouTubeDownloader.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +99,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Loading.resx">
+      <DependentUpon>Loading.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\YouTubeDownloader.resx">
       <DependentUpon>YouTubeDownloader.cs</DependentUpon>

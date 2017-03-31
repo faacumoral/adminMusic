@@ -157,6 +157,7 @@
             this.Name = "Inicio";
             this.Text = "Inicio";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Inicio_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMusica)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.musicaBindingSource)).EndInit();
             this.ResumeLayout(false);
