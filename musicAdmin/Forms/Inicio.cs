@@ -30,8 +30,9 @@ namespace musicAdmin
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
+            var ds = (dgvMusica.DataSource as List<Musica>);
             form.dgvMusica.Focus();
-            mpc.Play(musica[dgvMusica.CurrentCell.RowIndex].FullPath);
+            mpc.Play(ds[dgvMusica.CurrentCell.RowIndex].FullPath);
         }
         private void btnStop_Click(object sender, EventArgs e)
         {
@@ -41,6 +42,7 @@ namespace musicAdmin
 
         private void btnCopiar_Click(object sender, EventArgs e)
         {
+            var ds = (dgvMusica.DataSource as List<Musica>);
             if (form.dgvMusica.CurrentCell == null)
             {
                 MessageBox.Show("¡Seleccione una cancion!");
@@ -50,7 +52,7 @@ namespace musicAdmin
             if ( msg == null)
             {
                 // se leyo bien un usb, copio archivo
-                if (ac.Copiar(musica[form.dgvMusica.CurrentCell.RowIndex]))
+                if (ac.Copiar(ds[form.dgvMusica.CurrentCell.RowIndex]))
                 {
                     MessageBox.Show("¡Copia exitosa!");
                 }

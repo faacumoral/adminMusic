@@ -25,7 +25,6 @@ namespace musicAdmin.Controllers
         }
 
         /* muestra el form de carga 
-         * @form: form actual (para deshabilitar)
          * @msg: mensaje a mostrar
          * @return: thread del form de carga
          */
@@ -35,8 +34,7 @@ namespace musicAdmin.Controllers
             th.Start();
             return th;
         }
-        /* oculta el form
-         * @form: form a deshabilitar
+        /*
          * @th: thread a abortar
          */ 
         public static void LoadingFinish(Thread th)
