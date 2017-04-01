@@ -31,15 +31,16 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
             this.btnPlay = new System.Windows.Forms.Button();
-            this.dgvMusica = new System.Windows.Forms.DataGridView();
-            this.tituloDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.artistaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.albumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.musicaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnStop = new System.Windows.Forms.Button();
             this.btnCopiar = new System.Windows.Forms.Button();
             this.btnDescargar = new System.Windows.Forms.Button();
             this.btnRecargar = new System.Windows.Forms.Button();
+            this.txtBusqueda = new System.Windows.Forms.TextBox();
+            this.dgvMusica = new System.Windows.Forms.DataGridView();
+            this.tituloDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.artistaDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.albumDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.musicaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMusica)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.musicaBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -53,52 +54,6 @@
             this.btnPlay.TabIndex = 0;
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
-            // 
-            // dgvMusica
-            // 
-            this.dgvMusica.AutoGenerateColumns = false;
-            this.dgvMusica.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMusica.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.tituloDataGridViewTextBoxColumn,
-            this.artistaDataGridViewTextBoxColumn,
-            this.albumDataGridViewTextBoxColumn});
-            this.dgvMusica.DataSource = this.musicaBindingSource;
-            this.dgvMusica.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvMusica.Location = new System.Drawing.Point(12, 71);
-            this.dgvMusica.MultiSelect = false;
-            this.dgvMusica.Name = "dgvMusica";
-            this.dgvMusica.ReadOnly = true;
-            this.dgvMusica.Size = new System.Drawing.Size(1200, 387);
-            this.dgvMusica.TabIndex = 1;
-            this.dgvMusica.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMusica_CellContentClick);
-            // 
-            // tituloDataGridViewTextBoxColumn
-            // 
-            this.tituloDataGridViewTextBoxColumn.DataPropertyName = "Titulo";
-            this.tituloDataGridViewTextBoxColumn.HeaderText = "Titulo";
-            this.tituloDataGridViewTextBoxColumn.Name = "tituloDataGridViewTextBoxColumn";
-            this.tituloDataGridViewTextBoxColumn.ReadOnly = true;
-            this.tituloDataGridViewTextBoxColumn.Width = 600;
-            // 
-            // artistaDataGridViewTextBoxColumn
-            // 
-            this.artistaDataGridViewTextBoxColumn.DataPropertyName = "Artista";
-            this.artistaDataGridViewTextBoxColumn.HeaderText = "Artista";
-            this.artistaDataGridViewTextBoxColumn.Name = "artistaDataGridViewTextBoxColumn";
-            this.artistaDataGridViewTextBoxColumn.ReadOnly = true;
-            this.artistaDataGridViewTextBoxColumn.Width = 400;
-            // 
-            // albumDataGridViewTextBoxColumn
-            // 
-            this.albumDataGridViewTextBoxColumn.DataPropertyName = "Album";
-            this.albumDataGridViewTextBoxColumn.HeaderText = "Album";
-            this.albumDataGridViewTextBoxColumn.Name = "albumDataGridViewTextBoxColumn";
-            this.albumDataGridViewTextBoxColumn.ReadOnly = true;
-            this.albumDataGridViewTextBoxColumn.Width = 200;
-            // 
-            // musicaBindingSource
-            // 
-            this.musicaBindingSource.DataSource = typeof(musicAdmin.Musica);
             // 
             // btnStop
             // 
@@ -143,15 +98,66 @@
             this.btnRecargar.UseVisualStyleBackColor = true;
             this.btnRecargar.Click += new System.EventHandler(this.button1_Click);
             // 
+            // txtBusqueda
+            // 
+            this.txtBusqueda.Location = new System.Drawing.Point(10, 75);
+            this.txtBusqueda.Name = "txtBusqueda";
+            this.txtBusqueda.Size = new System.Drawing.Size(569, 20);
+            this.txtBusqueda.TabIndex = 4;
+            this.txtBusqueda.TextChanged += new System.EventHandler(this.txtBusqueda_TextChanged);
+            // 
+            // dgvMusica
+            // 
+            this.dgvMusica.AllowUserToResizeRows = false;
+            this.dgvMusica.AutoGenerateColumns = false;
+            this.dgvMusica.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMusica.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.tituloDataGridViewTextBoxColumn1,
+            this.artistaDataGridViewTextBoxColumn1,
+            this.albumDataGridViewTextBoxColumn1});
+            this.dgvMusica.DataSource = this.musicaBindingSource;
+            this.dgvMusica.Location = new System.Drawing.Point(10, 117);
+            this.dgvMusica.Name = "dgvMusica";
+            this.dgvMusica.RowHeadersVisible = false;
+            this.dgvMusica.Size = new System.Drawing.Size(1325, 700);
+            this.dgvMusica.TabIndex = 6;
+            this.dgvMusica.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMusica_CellEndEdit);
+            // 
+            // tituloDataGridViewTextBoxColumn1
+            // 
+            this.tituloDataGridViewTextBoxColumn1.DataPropertyName = "Titulo";
+            this.tituloDataGridViewTextBoxColumn1.HeaderText = "Titulo";
+            this.tituloDataGridViewTextBoxColumn1.Name = "tituloDataGridViewTextBoxColumn1";
+            this.tituloDataGridViewTextBoxColumn1.Width = 800;
+            // 
+            // artistaDataGridViewTextBoxColumn1
+            // 
+            this.artistaDataGridViewTextBoxColumn1.DataPropertyName = "Artista";
+            this.artistaDataGridViewTextBoxColumn1.HeaderText = "Artista";
+            this.artistaDataGridViewTextBoxColumn1.Name = "artistaDataGridViewTextBoxColumn1";
+            this.artistaDataGridViewTextBoxColumn1.Width = 300;
+            // 
+            // albumDataGridViewTextBoxColumn1
+            // 
+            this.albumDataGridViewTextBoxColumn1.DataPropertyName = "Album";
+            this.albumDataGridViewTextBoxColumn1.HeaderText = "Album";
+            this.albumDataGridViewTextBoxColumn1.Name = "albumDataGridViewTextBoxColumn1";
+            this.albumDataGridViewTextBoxColumn1.Width = 200;
+            // 
+            // musicaBindingSource
+            // 
+            this.musicaBindingSource.DataSource = typeof(musicAdmin.Musica);
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(779, 452);
+            this.ClientSize = new System.Drawing.Size(959, 452);
+            this.Controls.Add(this.dgvMusica);
+            this.Controls.Add(this.txtBusqueda);
             this.Controls.Add(this.btnRecargar);
             this.Controls.Add(this.btnDescargar);
             this.Controls.Add(this.btnCopiar);
-            this.Controls.Add(this.dgvMusica);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnPlay);
             this.Name = "Inicio";
@@ -161,21 +167,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvMusica)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.musicaBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Button btnPlay;
-        private System.Windows.Forms.DataGridView dgvMusica;
         private System.Windows.Forms.BindingSource musicaBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tituloDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn artistaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn albumDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnCopiar;
         private System.Windows.Forms.Button btnDescargar;
         private System.Windows.Forms.Button btnRecargar;
+        private System.Windows.Forms.TextBox txtBusqueda;
+        private System.Windows.Forms.DataGridView dgvMusica;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tituloDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn artistaDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn albumDataGridViewTextBoxColumn1;
     }
 }
 

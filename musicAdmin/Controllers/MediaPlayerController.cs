@@ -9,13 +9,19 @@ namespace musicAdmin.Controllers
     public class MediaPlayerController
     {
         WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
+        MediaPlayerController self = null;
         bool isPlaying = false;
+
+        public MediaPlayerController()
+        {
+            self = this;
+        }
         public void Play(string path)
         {
             try
             {
                 wplayer.URL = path;
-                if (this.isPlaying)
+                if (self.isPlaying)
                 {
                     wplayer.controls.stop();
                 }

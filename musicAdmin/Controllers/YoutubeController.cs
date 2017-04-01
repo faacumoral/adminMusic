@@ -29,8 +29,7 @@ namespace musicAdmin.Controllers
                     DownloadUrlResolver.DecryptDownloadUrl(video);
                 }
                 // quito caracteres no permitidos para nombres de videos
-                //string fullPath = System.IO.Path.Combine(path, ComunController.QuitarCaracteresProhibidos(video.Title)) + ".mp4";
-                string fullPath = System.IO.Path.Combine(path, video.Title) + ".mp4";
+                string fullPath = System.IO.Path.Combine(path, ComunController.QuitarCaracteresProhibidos(video.Title)) + ".mp4";
                 var videoDownloader = new VideoDownloader(video, fullPath);
                 videoDownloader.DownloadProgressChanged += (sender, args) => YouTubeDownloader.SetPBAValue(Convert.ToInt32(args.ProgressPercentage));
                 videoDownloader.Execute();

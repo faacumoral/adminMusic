@@ -68,12 +68,6 @@ namespace musicAdmin
 
         }
 
-        private void dgvMusica_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // FIXME
-            // agregar logica para editar informacion de la cancion
-        }
-
         private void btnDescargar_Click(object sender, EventArgs e)
         {
             YouTubeDownloader formYT = new YouTubeDownloader();
@@ -97,6 +91,7 @@ namespace musicAdmin
             form.dgvMusica.DataSource = null;
             musica = mc.GetTodas();
             form.dgvMusica.DataSource = musica;
+            form.dgvMusica.DataSource = musica;
             if (musica.Count == 0)
             {
                 MessageBox.Show("No se han encontrado canciones. Pulse el boton 'Recargar' para recargar canciones.");
@@ -110,5 +105,32 @@ namespace musicAdmin
            ac.GetProperties();
            recargarCanciones();
         }
+
+        private void txtBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            string filtro = txtBusqueda.Text;
+            dgvMusica.DataSource = musica.Where(m => m.Nombre.IndexOf(filtro, StringComparison.OrdinalIgnoreCase) != -1 || m.Titulo.IndexOf(filtro, StringComparison.OrdinalIgnoreCase) != -1 || m.Artista.IndexOf(filtro, StringComparison.OrdinalIgnoreCase) != -1).ToList();
+        }
+
+        private void dgvMusica_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            var ds = (dgvMusica.DataSource as List<Musica>);
+            var cancionActual = ds[e.RowIndex];
+            TagLib.File tagFile = TagLib.File.Create(cancionActual.FullPath);
+            tagFile.Tag.Title = cancionActual.Titulo != null ? cancionActual.Titulo : tagFile.Tag.Title;
+            tagFile.Tag.Album = cancionActual.Album != null ? cancionActual.Album : tagFile.Tag.Album;
+            //tagFile.Tag.FirstAlbumArtist = cancionActual.Artista;
+            if (tagFile.Tag.AlbumArtists.Count() == 0)
+            {
+                tagFile.Tag.AlbumArtists.ToList().Add(cancionActual.Artista);
+            }
+            else
+            {
+                //FIXME manejar artistas
+                tagFile.Tag.AlbumArtists[0] = cancionActual.Artista;
+            }
+            tagFile.Save();
+        }
+
     }
 }

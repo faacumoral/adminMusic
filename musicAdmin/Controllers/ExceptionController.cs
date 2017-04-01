@@ -13,7 +13,6 @@ namespace musicAdmin.Controllers
     {
         public static void FullException (Exception e)
         {
-            // FIXME
             // tratado de excepciones
             FullException(e, true);
         }

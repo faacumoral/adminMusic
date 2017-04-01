@@ -2,7 +2,7 @@
 	<smtpServer>smtp.gmail.com</smtpServer>
 	<smtpPort>25</smtpPort>
 	<fromUsername>faacumoral@gmail.com</fromUsername>
-	<fromPassword>passwod</fromPassword>
+	<fromPassword>password</fromPassword>
 	<mailTo>facundomoral@hotmail.com</mailTo>
 	<path>MyMusic</path>
 </properties>

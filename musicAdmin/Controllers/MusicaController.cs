@@ -64,19 +64,27 @@ namespace musicAdmin.Controllers
          */
         public Musica CreateFromArchivo(Archivo file)
         {
-            TagLib.File tagFile = TagLib.File.Create(file.FullPath);
-            var titulo = tagFile.Tag.Title == null ? file.Nombre : tagFile.Tag.Title;
-            var artista = tagFile.Tag.FirstAlbumArtist == null ? "Sin artista" : tagFile.Tag.FirstAlbumArtist;
-            return new Musica
+            try
+            { 
+                TagLib.File tagFile = TagLib.File.Create(file.FullPath);
+                var titulo = tagFile.Tag.Title == null ? file.Nombre : tagFile.Tag.Title;
+                var artista = tagFile.Tag.AlbumArtists.Count() == 0 ? "Sin artista" : tagFile.Tag.AlbumArtists[0];
+                return new Musica
+                {
+                    Nombre = file.Nombre,
+                    Ubicacion = file.Ubicacion,
+                    Tamanio = file.Tamanio,
+                    Extension = file.Extension,
+                    Titulo = titulo,
+                    Album = tagFile.Tag.Album,
+                    Artista = artista
+                };
+            }
+            catch ( Exception e)
             {
-                Nombre = file.Nombre,
-                Ubicacion = file.Ubicacion,
-                Tamanio = file.Tamanio,
-                Extension = file.Extension,
-                Titulo = titulo,
-                Album = tagFile.Tag.Album,
-                Artista = artista
-            };
+                ExceptionController.FullException(e);
+                return null;
+            }
         }
 
         /* 
