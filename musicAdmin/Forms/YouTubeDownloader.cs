@@ -14,7 +14,7 @@ namespace musicAdmin.Forms
     public partial class YouTubeDownloader : Form
     {
         private static YouTubeDownloader form = null;
-
+        private string video ;
         public static void SetPBAValue(int value)
         {
             if (value < 0) 
@@ -43,30 +43,43 @@ namespace musicAdmin.Forms
 
         private void btnDescargar_Click(object sender, EventArgs e)
         {
+            // FIXME seteado en Download por dev, despues se pasara a DataController.defaultPath
+            lblEstado.Text = "Descargando... por favor espere";
+            form.Enabled = false;
+            video = YoutubeController.GetAudioFromVideo(txtLink.Text, @"C:\Users\FacundoMoral\Downloads");
+            form.Enabled = true;
             
-            // FIXME ver donde guardar archivo descargar, manejar con property
-            string video = YoutubeController.GetAudioFromVideo(txtLink.Text, @"C:\Users\FacundoMoral\Downloads");
             if (video == null)
             {
+                lblEstado.Text = "Descarga fallida.";
                 MessageBox.Show("¡La descarga ha fallado!");
             }
             else
             {
-                if (MessageBox.Show("¡La descarga ha finalzado! ¿Desea pasar el audio al pendrive contectado?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                lblEstado.Text = "Descarga finalizada.";
+                if (MessageBox.Show("¡La descarga ha finalizado! ¿Desea pasar el audio al pendrive contectado?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     ArchivoController ac = new ArchivoController();
-                    if (ac.Copiar(ArchivoController.GetFromPath(video)))
+                    var msg = ac.GetUSB();
+                    if (msg == null)
                     {
-                        MessageBox.Show("¡Copia exitosa!");
+                        if (ac.Copiar(ArchivoController.GetFromPath(video)))
+                        {
+                            MessageBox.Show("¡Copiado correctamente!");
+                            Inicio inicio = new Inicio();
+                            inicio.Show();
+                            form.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("¡Copia falló!");
+                        }
                     }
                     else 
                     {
-                        MessageBox.Show("¡Copia falló!");
+                        MessageBox.Show(msg);
+                        btnCopiarAgain.Visible = true;
                     }
-                    // FIXME primero getUsb y despues ver si se puede copiar o no
-                    Inicio inicio = new Inicio();
-                    inicio.Show();
-                    form.Close();
                 }
                 
             }
@@ -75,6 +88,31 @@ namespace musicAdmin.Forms
         public void SetPBA(int newValue)
         {
             pbaDescarga.Value = newValue;
+        }
+
+        private void btnCopiarAgain_Click(object sender, EventArgs e)
+        {
+            ArchivoController ac = new ArchivoController();
+            var msg = ac.GetUSB();
+            if (msg == null)
+            {
+                if (ac.Copiar(ArchivoController.GetFromPath(video)))
+                {
+                    MessageBox.Show("¡Copiado correctamente!");
+                    Inicio inicio = new Inicio();
+                    inicio.Show();
+                    form.Close();
+                }
+                else
+                {
+                    MessageBox.Show("¡Copia falló!");
+                }
+            }
+            else
+            {
+                MessageBox.Show(msg);
+                btnCopiarAgain.Visible = true;
+            }
         }
 
     }

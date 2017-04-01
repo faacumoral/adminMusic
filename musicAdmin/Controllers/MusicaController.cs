@@ -17,6 +17,13 @@ namespace musicAdmin.Controllers
             return ParseArchivoAMusica(base.GetTodosEnUbicacion(path));
         }
 
+        /* sobrecarga de GetTodas, lee en path por default
+         * @return: lista de archivos de musica
+         */
+        public List<Musica> GetTodas()
+        {
+            return ParseArchivoAMusica(base.GetTodosEnUbicacion(DataController.defaultPath));
+        }
         /* 
          * busca canciones en lista de paths
          * @path: lista de rutas donde buscar musica

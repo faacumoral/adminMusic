@@ -23,6 +23,7 @@ namespace musicAdmin.Forms
         private void Loading_Load(object sender, EventArgs e)
         {
             label1.Text = labelMsg;
+            this.Width = labelMsg.Length * 15;
         }
 
     }

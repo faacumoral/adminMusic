@@ -53,20 +53,28 @@ namespace musicAdmin.Controllers
          */
         public List<USB> GetUSBConectados()
         {
-            // FIXME encapsular try
             List<USB> result = new List<USB>();
-            foreach (DriveInfo drive in DriveInfo.GetDrives())
+            try
             {
-                if (drive.DriveType == DriveType.Removable && drive.IsReady)
+                foreach (DriveInfo drive in DriveInfo.GetDrives())
                 {
-                    result.Add(new USB
+                    if (drive.DriveType == DriveType.Removable && drive.IsReady)
                     {
-                        Etiqueta = drive.VolumeLabel,
-                        Ruta = drive.RootDirectory.FullName
-                    });
+                        result.Add(new USB
+                        {
+                            Etiqueta = drive.VolumeLabel,
+                            Ruta = drive.RootDirectory.FullName
+                        });
+                    }
                 }
+                return result;
             }
-            return result;
+            catch (Exception e)
+            {
+                ExceptionController.FullException(e);
+                return result;
+            }
+            
         }
         /*
          * @archivo: archivo a copiar
@@ -103,6 +111,56 @@ namespace musicAdmin.Controllers
          * @path: path donde buscar el archivo
          * @return: nuevo archivo generado, null si hubo excepcion
          */ 
+        public void GetProperties()
+        {
+            try
+            {
+                System.Xml.XmlReader xmlReader = System.Xml.XmlReader.Create("properties.xml");
+                while (xmlReader.Read())
+                {
+                    if (xmlReader.NodeType == System.Xml.XmlNodeType.Element)
+                    {
+                       switch (xmlReader.Name)
+	                   {
+                            case "path":
+                               if (xmlReader.ReadInnerXml() == "MyMusic")
+                               {
+                                   DataController.defaultPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+                               }
+                                break;
+                            case "smtpServer":
+                               DataController.smtpServer = xmlReader.ReadInnerXml();
+                               break;
+                            case "smtpPort":
+                                DataController.smtpPort = Int32.Parse(xmlReader.ReadInnerXml());
+                                break;
+                            case "fromUsername":
+                               DataController.fromUsername = xmlReader.ReadInnerXml();
+                               break;
+                            case "fromPassword":
+                               DataController.fromPassword = xmlReader.ReadInnerXml();
+                               break;
+                            case "mailTo":
+                               DataController.mailTo = xmlReader.ReadInnerXml();
+                               break;
+	                   }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                // si no leyo properties setea MyMusic por default
+                DataController.defaultPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+                Inicio.ShowMessageBox("CATCH : " + e.Message);
+                ExceptionController.FullException(e); 
+
+            }
+        }
+
+        /* create archivo en base a Path
+         * @string: path donde buscar el archivo
+         * @return: archivo creado
+         */
         public static Archivo GetFromPath(string path)
         {
             try

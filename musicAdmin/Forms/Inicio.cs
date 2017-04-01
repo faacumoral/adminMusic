@@ -85,24 +85,30 @@ namespace musicAdmin
         {
             recargarCanciones();
         }
+
+        public static void ShowMessageBox(string msg)
+        {
+            MessageBox.Show(msg);
+        }
         internal void recargarCanciones()
         {
-            form.Enabled = false;
             var th = ComunController.Loading("Cargando canciones...");
+            form.Visible = false;
             form.dgvMusica.DataSource = null;
-            musica = mc.GetTodasEnMyMusic();
+            musica = mc.GetTodas();
             form.dgvMusica.DataSource = musica;
             if (musica.Count == 0)
             {
                 MessageBox.Show("No se han encontrado canciones. Pulse el boton 'Recargar' para recargar canciones.");
             }
-            form.Enabled = true;
+            form.Visible = true;
             ComunController.LoadingFinish(th);            
         }
 
         private void Inicio_Load_1(object sender, EventArgs e)
         {
-            recargarCanciones();
+           ac.GetProperties();
+           recargarCanciones();
         }
     }
 }

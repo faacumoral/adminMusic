@@ -32,7 +32,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtLink = new System.Windows.Forms.TextBox();
             this.pbaDescarga = new System.Windows.Forms.ProgressBar();
-            this.lblState = new System.Windows.Forms.Label();
+            this.lblEstado = new System.Windows.Forms.Label();
+            this.btnCopiarAgain = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDescargar
@@ -66,28 +67,42 @@
             // pbaDescarga
             // 
             this.pbaDescarga.ForeColor = System.Drawing.Color.LawnGreen;
-            this.pbaDescarga.Location = new System.Drawing.Point(164, 156);
+            this.pbaDescarga.Location = new System.Drawing.Point(164, 157);
             this.pbaDescarga.Name = "pbaDescarga";
             this.pbaDescarga.Size = new System.Drawing.Size(252, 23);
             this.pbaDescarga.TabIndex = 3;
             // 
-            // lblState
+            // lblEstado
             // 
-            this.lblState.AutoSize = true;
-            this.lblState.Location = new System.Drawing.Point(275, 130);
-            this.lblState.Name = "lblState";
-            this.lblState.Size = new System.Drawing.Size(0, 13);
-            this.lblState.TabIndex = 4;
+            this.lblEstado.AutoSize = true;
+            this.lblEstado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstado.Location = new System.Drawing.Point(212, 128);
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(0, 16);
+            this.lblEstado.TabIndex = 5;
+            // 
+            // btnCopiarAgain
+            // 
+            this.btnCopiarAgain.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCopiarAgain.Location = new System.Drawing.Point(183, 204);
+            this.btnCopiarAgain.Name = "btnCopiarAgain";
+            this.btnCopiarAgain.Size = new System.Drawing.Size(213, 34);
+            this.btnCopiarAgain.TabIndex = 0;
+            this.btnCopiarAgain.Text = "Volver a copiar";
+            this.btnCopiarAgain.UseVisualStyleBackColor = true;
+            this.btnCopiarAgain.Visible = false;
+            this.btnCopiarAgain.Click += new System.EventHandler(this.btnCopiarAgain_Click);
             // 
             // YouTubeDownloader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(615, 262);
-            this.Controls.Add(this.lblState);
+            this.Controls.Add(this.lblEstado);
             this.Controls.Add(this.pbaDescarga);
             this.Controls.Add(this.txtLink);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnCopiarAgain);
             this.Controls.Add(this.btnDescargar);
             this.Name = "YouTubeDownloader";
             this.Text = "YouTubeDownloader";
@@ -102,6 +117,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtLink;
         private System.Windows.Forms.ProgressBar pbaDescarga;
-        private System.Windows.Forms.Label lblState;
+        private System.Windows.Forms.Label lblEstado;
+        private System.Windows.Forms.Button btnCopiarAgain;
     }
 }
