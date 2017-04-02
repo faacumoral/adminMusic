@@ -90,9 +90,9 @@
             // btnRecargar
             // 
             this.btnRecargar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRecargar.Location = new System.Drawing.Point(596, 23);
+            this.btnRecargar.Location = new System.Drawing.Point(596, 18);
             this.btnRecargar.Name = "btnRecargar";
-            this.btnRecargar.Size = new System.Drawing.Size(134, 23);
+            this.btnRecargar.Size = new System.Drawing.Size(134, 33);
             this.btnRecargar.TabIndex = 3;
             this.btnRecargar.Text = "Recargar";
             this.btnRecargar.UseVisualStyleBackColor = true;
@@ -117,8 +117,10 @@
             this.albumDataGridViewTextBoxColumn1});
             this.dgvMusica.DataSource = this.musicaBindingSource;
             this.dgvMusica.Location = new System.Drawing.Point(10, 117);
+            this.dgvMusica.MultiSelect = false;
             this.dgvMusica.Name = "dgvMusica";
             this.dgvMusica.RowHeadersVisible = false;
+            this.dgvMusica.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMusica.Size = new System.Drawing.Size(1325, 700);
             this.dgvMusica.TabIndex = 6;
             this.dgvMusica.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMusica_CellEndEdit);
@@ -163,6 +165,7 @@
             this.Name = "Inicio";
             this.Text = "Inicio";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Inicio_FormClosing);
             this.Load += new System.EventHandler(this.Inicio_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMusica)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.musicaBindingSource)).EndInit();

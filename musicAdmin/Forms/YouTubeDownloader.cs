@@ -43,10 +43,14 @@ namespace musicAdmin.Forms
 
         private void btnDescargar_Click(object sender, EventArgs e)
         {
-            // FIXME seteado en Download por dev, despues se pasara a DataController.defaultPath
+            if (txtLink.Text.IndexOf("www.youtube.com", StringComparison.OrdinalIgnoreCase) == -1)
+            {
+                MessageBox.Show("¡Ingrese un link válido!");
+                return;
+            }
             lblEstado.Text = "Descargando... por favor espere";
             form.Enabled = false;
-            video = YoutubeController.GetAudioFromVideo(txtLink.Text, @"C:\Users\FacundoMoral\Downloads");
+            video = YoutubeController.GetAudioFromVideo(txtLink.Text, DataController.defaultPath);
             form.Enabled = true;
             
             if (video == null)
@@ -113,6 +117,13 @@ namespace musicAdmin.Forms
                 MessageBox.Show(msg);
                 btnCopiarAgain.Visible = true;
             }
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            Inicio inicio = new Inicio();
+            form.Close();
+            inicio.Show();
         }
 
     }

@@ -34,6 +34,7 @@
             this.pbaDescarga = new System.Windows.Forms.ProgressBar();
             this.lblEstado = new System.Windows.Forms.Label();
             this.btnCopiarAgain = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDescargar
@@ -93,11 +94,23 @@
             this.btnCopiarAgain.Visible = false;
             this.btnCopiarAgain.Click += new System.EventHandler(this.btnCopiarAgain_Click);
             // 
+            // btnVolver
+            // 
+            this.btnVolver.Location = new System.Drawing.Point(492, 215);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(111, 35);
+            this.btnVolver.TabIndex = 6;
+            this.btnVolver.Text = "Volver a inicio";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
             // YouTubeDownloader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(615, 262);
+            this.ControlBox = false;
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.lblEstado);
             this.Controls.Add(this.pbaDescarga);
             this.Controls.Add(this.txtLink);
@@ -119,5 +132,6 @@
         private System.Windows.Forms.ProgressBar pbaDescarga;
         private System.Windows.Forms.Label lblEstado;
         private System.Windows.Forms.Button btnCopiarAgain;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

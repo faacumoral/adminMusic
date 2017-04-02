@@ -113,5 +113,16 @@ namespace musicAdmin.Controllers
             }
             return result;
         }
+        /* cambia tags (arttista, title y album) de la cancion
+         * @mus: cancion a modificar
+         */
+        public void ChangeMusicaTags(Musica mus)
+        {
+            TagLib.File tagFile = TagLib.File.Create(mus.FullPath);
+            tagFile.Tag.Title = mus.Titulo != null ? mus.Titulo : tagFile.Tag.Title;
+            tagFile.Tag.Album = mus.Album != null ? mus.Album : tagFile.Tag.Album;
+            if (mus.Artista != "Sin artista") tagFile.Tag.AlbumArtists = new string[] { mus.Artista };
+            tagFile.Save();
+        }
     }
 }

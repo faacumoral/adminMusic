@@ -20,7 +20,6 @@ namespace musicAdmin.Controllers
                 }
                 if (!DataController.areMailPropertiesSet)
                 {
-                    Inicio.ShowMessageBox("alguno es null, return");
                     // properties no estan seteadas, no se puede enviar mail
                     return;
                 }

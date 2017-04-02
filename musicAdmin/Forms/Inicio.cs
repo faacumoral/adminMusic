@@ -42,31 +42,41 @@ namespace musicAdmin
 
         private void btnCopiar_Click(object sender, EventArgs e)
         {
-            var ds = (dgvMusica.DataSource as List<Musica>);
-            if (form.dgvMusica.CurrentCell == null)
+            try 
             {
-                MessageBox.Show("¡Seleccione una cancion!");
-                return;
-            }
-            string msg = ac.GetUSB();
-            if ( msg == null)
-            {
-                // se leyo bien un usb, copio archivo
-                if (ac.Copiar(ds[form.dgvMusica.CurrentCell.RowIndex]))
+                var ds = (dgvMusica.DataSource as List<Musica>);
+                if (form.dgvMusica.CurrentCell == null)
                 {
-                    MessageBox.Show("¡Copia exitosa!");
+                    MessageBox.Show("¡Seleccione una cancion!");
+                    return;
+                }
+                string msg = ac.GetUSB();
+                form.Enabled = false;
+                if (msg == null)
+                {
+                    // se leyo bien un usb, copio archivo
+                    if (ac.Copiar(ds[form.dgvMusica.CurrentCell.RowIndex]))
+                    {
+                        MessageBox.Show("¡Copia exitosa!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("¡Copia falló!");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("¡Copia falló!");
+                    // algo fallo (ninguno o mas de uno conectado)
+                    MessageBox.Show(msg);
                 }
+                form.Enabled = true;
+                form.dgvMusica.Focus();
             }
-            else
+            catch (Exception er)
             {
-                // algo fallo (ninguno o mas de uno conectado)
-                MessageBox.Show(msg);
+                ExceptionController.FullException(er);
             }
-            form.dgvMusica.Focus();
+            
 
         }
 
@@ -88,18 +98,25 @@ namespace musicAdmin
         }
         internal void recargarCanciones()
         {
-            var th = ComunController.Loading("Cargando canciones...");
-            form.Visible = false;
-            form.dgvMusica.DataSource = null;
-            musica = mc.GetTodas();
-            form.dgvMusica.DataSource = musica;
-            form.dgvMusica.DataSource = musica;
-            if (musica.Count == 0)
+            try
+            { 
+                var th = ComunController.Loading("Cargando canciones...");
+                form.Visible = false;
+                form.dgvMusica.DataSource = null;
+                musica = mc.GetTodas();
+                form.dgvMusica.DataSource = musica;
+                form.dgvMusica.DataSource = musica;
+                if (musica.Count == 0)
+                {
+                    MessageBox.Show("No se han encontrado canciones. Pulse el boton 'Recargar' para recargar canciones.");
+                }
+                form.Visible = true;
+                ComunController.LoadingFinish(th);     
+             }
+            catch (Exception e)
             {
-                MessageBox.Show("No se han encontrado canciones. Pulse el boton 'Recargar' para recargar canciones.");
+                ExceptionController.FullException(e);
             }
-            form.Visible = true;
-            ComunController.LoadingFinish(th);            
         }
 
         private void Inicio_Load_1(object sender, EventArgs e)
@@ -116,22 +133,19 @@ namespace musicAdmin
 
         private void dgvMusica_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            var ds = (dgvMusica.DataSource as List<Musica>);
-            var cancionActual = ds[e.RowIndex];
-            TagLib.File tagFile = TagLib.File.Create(cancionActual.FullPath);
-            tagFile.Tag.Title = cancionActual.Titulo != null ? cancionActual.Titulo : tagFile.Tag.Title;
-            tagFile.Tag.Album = cancionActual.Album != null ? cancionActual.Album : tagFile.Tag.Album;
-            //tagFile.Tag.FirstAlbumArtist = cancionActual.Artista;
-            if (tagFile.Tag.AlbumArtists.Count() == 0)
+            mc.ChangeMusicaTags((dgvMusica.DataSource as List<Musica>)[e.RowIndex]);
+        }
+
+        private void Inicio_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Desea cerrar la aplicación? Si está copiando una canción puede provocar errores", "Atención", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
             {
-                tagFile.Tag.AlbumArtists.ToList().Add(cancionActual.Artista);
+                Environment.Exit(0);
             }
-            else
+            else 
             {
-                //FIXME manejar artistas
-                tagFile.Tag.AlbumArtists[0] = cancionActual.Artista;
+                e.Cancel = true;
             }
-            tagFile.Save();
         }
 
     }

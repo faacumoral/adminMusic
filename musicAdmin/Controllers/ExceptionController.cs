@@ -42,7 +42,7 @@ namespace musicAdmin.Controllers
             }
             finally
             {
-                Application.Exit();
+                Environment.Exit(0);
             }
 
         }

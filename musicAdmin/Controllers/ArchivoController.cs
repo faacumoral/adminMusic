@@ -123,9 +123,14 @@ namespace musicAdmin.Controllers
                        switch (xmlReader.Name)
 	                   {
                             case "path":
-                               if (xmlReader.ReadInnerXml() == "MyMusic")
+                               var path = xmlReader.ReadInnerXml();
+                               if (path == "MyMusic")
                                {
                                    DataController.defaultPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+                               } 
+                               else
+                               {
+                                   DataController.defaultPath = path;
                                }
                                 break;
                             case "smtpServer":
